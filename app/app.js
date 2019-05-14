@@ -6,7 +6,7 @@ Promise = require('bluebird'); // eslint-disable-line
 // app imports
 const { connectToDatabase, globalResponseHeaders } = require('./config');
 const { errorHandler } = require('./handlers');
-const { thingsRouter } = require('./routers');
+const { thingsRouter, accountsRouter } = require('./routers');
 
 // global constants
 dotenv.config();
@@ -30,6 +30,7 @@ app.use(bodyParserHandler); // error handling specific to body parser only
 app.use(globalResponseHeaders);
 
 app.use('/things', thingsRouter);
+app.use('/accounts', accountsRouter);
 
 // catch-all for 404 "Not Found" errors
 app.get('*', fourOhFourHandler);
