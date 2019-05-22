@@ -40,8 +40,8 @@ const main = async () => {
 
     for (let account of accounts){
         let options = {
-            uri: `http://${apiUrl}/accounts/${account.id}`,
-            method: 'POST',
+            uri: `http://${apiUrl}/accounts/`,
+            method: 'GET',
             body: account ,
             json: true
         }

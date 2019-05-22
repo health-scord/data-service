@@ -11,13 +11,13 @@ const { createAccount, readAccount, updateAccount, deleteAccount } = accountHand
 
 /* All the Things Route */
 router
-  .route('/accounts')
+  .route('/')
     .get(readAccounts)
     .post(createAccount);
 
 /* Single Thing by Name Route */
 router
-  .route('/accounts/:id')
+  .route('/:id')
     .get(readAccount)
     .post(createAccount)
     .patch(updateAccount)
