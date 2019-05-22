@@ -1,7 +1,7 @@
 const rp = require("request-promise")
-const apiUrl = `https://157.230.2.203`
+const apiUrl = `157.230.2.203:5000`
 
-const main = () => {
+const main = async () => {
 
     //needs to create a list of account objects and post them to database
 
@@ -45,6 +45,8 @@ const main = () => {
             body: account ,
             json: true
         }
+
+        console.log(options)
                  
         try{            
             await rp(options)

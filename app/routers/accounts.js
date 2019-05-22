@@ -19,6 +19,7 @@ router
 router
   .route('/accounts/:id')
     .get(readAccount)
+    .post(createAccount)
     .patch(updateAccount)
     .delete(deleteAccount);
 
