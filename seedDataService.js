@@ -40,8 +40,8 @@ const main = async () => {
 
     for (let account of accounts){
         let options = {
-            uri: `http://${apiUrl}/accounts/`,
-            method: 'GET',
+            uri: `http://${apiUrl}/accounts/${account.id}`,
+            method: 'POST',
             body: account ,
             json: true
         }
@@ -51,7 +51,7 @@ const main = async () => {
         try{            
             await rp(options)
         } catch(error){
-            console.log(error)
+            console.log(error.message)
         }
     }
 

@@ -10,16 +10,20 @@ const { accountNewSchema, accountUpdateSchema } = require('../schemas');
  * Validate the POST request body and create a new Account
  */
 async function createAccount(request, response, next) {
-  const validation = validate(request.body, accountNewSchema);
-  if (!validation.valid) {
-    return next(
-      new APIError(
-        400,
-        'Bad Request',
-        validation.errors.map(e => e.stack).join('. ')
-      )
-    );
-  }
+
+  console.log('inside create new account...')
+  
+
+  // const validation = validate(request.body, accountNewSchema);
+  // if (!validation.valid) {
+  //   return next(
+  //     new APIError(
+  //       400,
+  //       'Bad Request',
+  //       validation.errors.map(e => e.stack).join('. ')
+  //     )
+  //   );
+  // }
 
   try {
     const newAccount = await Account.createAccount(new Account(request.body));
