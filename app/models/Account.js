@@ -9,15 +9,33 @@ const Schema = mongoose.Schema;
 
 const accountSchema = new Schema({
   id: String,
-  healthScore: String,
-  devices: Array,
-  //need to fill out this schema in detail....
+  firstName: String,
+  lastName: String,
+  devices: [
+    {
+      make: String,
+      model: String,
+      deviceUserId: String,
+      accessToken: String,
+      refreshToken: String
+    }
+  ],
+  healthScore: {
+    calculated: String,
+    components: {
+      sleep: {
+        averageDailySleepHours: String
+      },
+      fitness:{
+        averageDailyRigorousActivityMinutes: String,
+        averageRigorousActivityTimesPerWeek: String
+    },
+    heartRate:{
+        averageRestingHeartRate: String
+    }
 
-
-
-  // number: Number,
-  // stuff: [String],
-  // url: String
+    }
+  },
 });
 
 accountSchema.statics = {
