@@ -9,6 +9,12 @@ const Schema = mongoose.Schema;
 
 const accountSchema = new Schema({
   id: String,
+  healthScore: String,
+  devices: Array,
+  //need to fill out this schema in detail....
+
+
+
   // number: Number,
   // stuff: [String],
   // url: String
