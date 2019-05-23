@@ -57,6 +57,8 @@ async function updateAccount(request, response, next) {
 
   const { id } = request.params;
 
+  console.log(request.body)
+
   // const validation = validate(request.body, accountUpdateSchema);
   // if (!validation.valid) {
   //   return next(
