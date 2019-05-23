@@ -52,18 +52,21 @@ async function readAccount(request, response, next) {
  * @param {String} id - the id of the Account to update
  */
 async function updateAccount(request, response, next) {
+
+  console.log('inside update account...')
+
   const { id } = request.params;
 
-  const validation = validate(request.body, accountUpdateSchema);
-  if (!validation.valid) {
-    return next(
-      new APIError(
-        400,
-        'Bad Request',
-        validation.errors.map(e => e.stack).join('. ')
-      )
-    );
-  }
+  // const validation = validate(request.body, accountUpdateSchema);
+  // if (!validation.valid) {
+  //   return next(
+  //     new APIError(
+  //       400,
+  //       'Bad Request',
+  //       validation.errors.map(e => e.stack).join('. ')
+  //     )
+  //   );
+  // }
 
   try {
     const account = await Account.updateAccount(id, request.body);
