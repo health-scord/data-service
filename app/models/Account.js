@@ -106,7 +106,7 @@ accountSchema.statics = {
    * @param {Object} accountUpdate - the json containing the Account attributes
    * @returns {Promise<Thing, APIError>}
    */
-  async updateAccount(id, acountUpdate) {
+  async updateAccount(id, accountUpdate) {
     const account = await this.findOneAndUpdate({ id }, accountUpdate, {
       new: true
     });
