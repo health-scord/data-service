@@ -34,6 +34,8 @@ const jwtCheck = jwt({
   algorithms: ["RS256"]
 });
 
+//app.use(jwtCheck)
+
 // database
 connectToDatabase();
 

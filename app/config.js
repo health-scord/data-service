@@ -6,10 +6,13 @@ const PORT = process.env.PORT || 8080;
 
 // database configs
 
-let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/myapp";
+let MONGODB_URI = process.env.MONGODB_URI
+  ? `mongodb://${process.env.MONGODB_URI}:27017/myapp`
+  : `mongodb://localhost:27017/myapp`;
 
 console.log("right here..");
 console.log(MONGODB_URI);
+console.log(`mongodb://${process.env.MONGODB_URI}:27017/myapp`);
 
 if (ENV === "test") {
   MONGODB_URI = global.__MONGO_URI__;
