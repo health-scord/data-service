@@ -1,9 +1,8 @@
 // npm packages
 const dotenv = require("dotenv");
 const express = require("express");
-const jwt = require("express-jwt");
-const jwtAuthz = require("express-jwt-authz");
-const jwksRsa = require("jwks-rsa");
+var jwt = require("express-jwt");
+var jwks = require("jwks-rsa");
 
 Promise = require("bluebird"); // eslint-disable-line
 
@@ -47,7 +46,7 @@ app.use(bodyParserHandler); // error handling specific to body parser only
 app.use(globalResponseHeaders);
 
 app.use("/things", thingsRouter);
-app.use("/accounts", checkJwt, accountsRouter);
+app.use("/accounts", jwtCheck, accountsRouter);
 
 // catch-all for 404 "Not Found" errors
 app.get("*", fourOhFourHandler);
