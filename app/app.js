@@ -35,8 +35,6 @@ const jwtCheck = jwt({
   algorithms: ["RS256"]
 });
 
-app.use(jwtCheck);
-
 // database
 connectToDatabase();
 
@@ -49,7 +47,7 @@ app.use(bodyParserHandler); // error handling specific to body parser only
 app.use(globalResponseHeaders);
 
 app.use("/things", thingsRouter);
-app.use("/accounts", accountsRouter);
+app.use("/accounts", checkJwt, accountsRouter);
 
 // catch-all for 404 "Not Found" errors
 app.get("*", fourOhFourHandler);
