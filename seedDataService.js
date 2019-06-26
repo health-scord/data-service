@@ -1,5 +1,5 @@
 const rp = require("request-promise");
-const apiUrl = `68.183.100.145:5000`;
+const apiUrl = `http://data-service:9000`;
 
 const main = async () => {
   //needs to create a list of account objects and post them to database
