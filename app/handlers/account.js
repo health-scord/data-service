@@ -38,14 +38,9 @@ async function createAccount(request, response, next) {
 async function readAccount(request, response, next) {
   const { id } = request.params;
   try {
-    console.log("in readAccount");
-    console.log(request.body);
     const account = await Account.readAccount(id);
-    console.log(account);
     return response.json(account);
   } catch (err) {
-    console.log("in readAccount error catch");
-    console.log(err);
     return next(err);
   }
 }

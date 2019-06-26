@@ -1,8 +1,8 @@
 // npm packages
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // app imports
-const { APIError } = require('../helpers');
+const { APIError } = require("../helpers");
 
 // globals
 const Schema = mongoose.Schema;
@@ -26,16 +26,15 @@ const accountSchema = new Schema({
       sleep: {
         averageDailySleepHours: String
       },
-      fitness:{
+      fitness: {
         averageDailyRigorousActivityMinutes: String,
         averageRigorousActivityTimesPerWeek: String
-    },
-    heartRate:{
+      },
+      heartRate: {
         averageRestingHeartRate: String
+      }
     }
-
-    }
-  },
+  }
 });
 
 accountSchema.statics = {
@@ -49,7 +48,7 @@ accountSchema.statics = {
     if (duplicate) {
       throw new APIError(
         409,
-        'Account Already Exists',
+        "Account Already Exists",
         `There is already an account with id '${newAccount.id}'.`
       );
     }
@@ -64,7 +63,7 @@ accountSchema.statics = {
   async deleteAccount(id) {
     const deleted = await this.findOneAndRemove({ id });
     if (!deleted) {
-      throw new APIError(404, 'Thing Not Found', `No thing '${name}' found.`);
+      throw new APIError(404, "Thing Not Found", `No thing '${name}' found.`);
     }
     return deleted.toObject();
   },
@@ -76,8 +75,8 @@ accountSchema.statics = {
   async readAccount(id) {
     const account = await this.findOne({ id });
 
-    if (!thing) {
-      throw new APIError(404, 'Account Not Found', `No account '${id}' found.`);
+    if (!account) {
+      throw new APIError(404, "Account Not Found", `No account '${id}' found.`);
     }
     return account.toObject();
   },
@@ -111,7 +110,7 @@ accountSchema.statics = {
       new: true
     });
     if (!account) {
-      throw new APIError(404, 'Account Not Found', `No account '${id}' found.`);
+      throw new APIError(404, "Account Not Found", `No account '${id}' found.`);
     }
     return account.toObject();
   }
@@ -129,4 +128,4 @@ accountSchema.options.toObject.transform = (doc, ret) => {
 /** Ensure MongoDB Indices **/
 //accountSchema.index({ name: 1, number: 1 }, { unique: true }); // example compound idx
 
-module.exports = mongoose.model('Account', accountSchema);
+module.exports = mongoose.model("Account", accountSchema);
