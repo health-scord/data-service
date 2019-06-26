@@ -48,7 +48,7 @@ app.use(bodyParserHandler); // error handling specific to body parser only
 app.use(globalResponseHeaders);
 
 app.use("/things", thingsRouter);
-app.use("/accounts", jwtCheck, accountsRouter);
+app.use("/accounts", accountsRouter);
 
 // catch-all for 404 "Not Found" errors
 app.get("*", fourOhFourHandler);
