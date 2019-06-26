@@ -44,6 +44,8 @@ async function readAccount(request, response, next) {
     console.log(account);
     return response.json(account);
   } catch (err) {
+    console.log("in readAccount error catch");
+    console.log(err);
     return next(err);
   }
 }
