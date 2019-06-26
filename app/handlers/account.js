@@ -1,18 +1,16 @@
 // npm packages
-const { validate } = require('jsonschema');
+const { validate } = require("jsonschema");
 
 // app imports
-const { Account } = require('../models');
-const { APIError } = require('../helpers');
-const { accountNewSchema, accountUpdateSchema } = require('../schemas');
+const { Account } = require("../models");
+const { APIError } = require("../helpers");
+const { accountNewSchema, accountUpdateSchema } = require("../schemas");
 
 /**
  * Validate the POST request body and create a new Account
  */
 async function createAccount(request, response, next) {
-
-  console.log('inside create new account...')
-  
+  console.log("inside create new account...");
 
   // const validation = validate(request.body, accountNewSchema);
   // if (!validation.valid) {
@@ -40,7 +38,10 @@ async function createAccount(request, response, next) {
 async function readAccount(request, response, next) {
   const { id } = request.params;
   try {
+    console.log("in readAccount");
+    console.log(request.body);
     const account = await Account.readAccount(id);
+    console.log(account);
     return response.json(account);
   } catch (err) {
     return next(err);
@@ -52,12 +53,11 @@ async function readAccount(request, response, next) {
  * @param {String} id - the id of the Account to update
  */
 async function updateAccount(request, response, next) {
-
-  console.log('inside update account...')
+  console.log("inside update account...");
 
   const { id } = request.params;
 
-  console.log(request.body)
+  console.log(request.body);
 
   // const validation = validate(request.body, accountUpdateSchema);
   // if (!validation.valid) {

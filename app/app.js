@@ -1,8 +1,6 @@
 // npm packages
 const dotenv = require("dotenv");
 const express = require("express");
-var jwt = require("express-jwt");
-var jwks = require("jwks-rsa");
 
 Promise = require("bluebird"); // eslint-disable-line
 
@@ -20,21 +18,6 @@ const {
   fourOhFourHandler,
   fourOhFiveHandler
 } = errorHandler;
-
-//Auth stuff
-const jwtCheck = jwt({
-  secret: jwks.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: "https://dev-5ubi1s8k.auth0.com/.well-known/jwks.json"
-  }),
-  audience: "https://68.183.100.145/api",
-  issuer: "https://dev-5ubi1s8k.auth0.com/",
-  algorithms: ["RS256"]
-});
-
-//app.use(jwtCheck)
 
 // database
 connectToDatabase();
