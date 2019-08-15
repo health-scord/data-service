@@ -34,13 +34,22 @@ const accountSchema = new Schema({
         averageRestingHeartRate: String
       }
     }
-  }
+  },
+  offers: [
+    {
+      title: String,
+      description: String,
+      company: String,
+      link: String,
+      image: String
+    }
+  ]
 });
 
 accountSchema.statics = {
   /**
-   * Create a Single New Thing
-   * @param {object} newAccount - an instance of Thing
+   * Create a Single New account
+   * @param {object} newAccount - an instance of account
    * @returns {Promise<Account, APIError>}
    */
   async createAccount(newAccount) {
@@ -56,19 +65,23 @@ accountSchema.statics = {
     return account.toObject();
   },
   /**
-   * Delete a single Thing
+   * Delete a single account
    * @param {String} id - the Account's name
    * @returns {Promise<Account, APIError>}
    */
   async deleteAccount(id) {
     const deleted = await this.findOneAndRemove({ id });
     if (!deleted) {
-      throw new APIError(404, "Thing Not Found", `No thing '${name}' found.`);
+      throw new APIError(
+        404,
+        "Account Not Found",
+        `No account '${name}' found.`
+      );
     }
     return deleted.toObject();
   },
   /**
-   * Get a single Thing by name
+   * Get a single account by name
    * @param {String} id - the Accounts's name
    * @returns {Promise<Account, APIError>}
    */
@@ -81,12 +94,12 @@ accountSchema.statics = {
     return account.toObject();
   },
   /**
-   * Get a list of Things
-   * @param {Object} query - pre-formatted query to retrieve things.
+   * Get a list of accounts
+   * @param {Object} query - pre-formatted query to retrieve accounts.
    * @param {Object} fields - a list of fields to select or not in object form
    * @param {String} skip - number of docs to skip (for pagination)
    * @param {String} limit - number of docs to limit by (for pagination)
-   * @returns {Promise<Things, APIError>}
+   * @returns {Promise<accounts, APIError>}
    */
   async readAccounts(query, fields, skip, limit) {
     const accounts = await this.find(query, fields)
@@ -103,7 +116,7 @@ accountSchema.statics = {
    * Patch/Update a single Account
    * @param {String} id - the Account's name
    * @param {Object} accountUpdate - the json containing the Account attributes
-   * @returns {Promise<Thing, APIError>}
+   * @returns {Promise<account, APIError>}
    */
   async updateAccount(id, accountUpdate) {
     const account = await this.findOneAndUpdate({ id }, accountUpdate, {

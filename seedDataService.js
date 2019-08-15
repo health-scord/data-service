@@ -2,103 +2,47 @@ const rp = require("request-promise");
 const apiUrl = `http://data-service:9000`;
 
 const main = async () => {
-  //needs to create a list of account objects and post them to database
+  const options = {
+    uri: `http://${apiUrl}/accounts/`,
+    method: "GET",
+    json: true
+  };
 
-  let accounts = [
-    {
-      id: "r43e4564r",
-      firstName: "Jared",
-      lastName: "Starin",
-      devices: [
-        {
-          make: "fitbit",
-          model: "charge3",
-          deviceUserId: "",
-          accessToken: "",
-          refreshToken: ""
-        }
-      ],
-      healthScore: {
-        calculated: "780",
-        components: {
-          sleep: {
-            averageDailySleepHours: "5.5"
-          },
-          fitness: {
-            averageDailyRigorousActivityMinutes: "35",
-            averageRigorousActivityTimesPerWeek: "3"
-          },
-          heartRate: {
-            averageRestingHeartRate: "73"
-          }
-        }
-      }
-    }
-    // {
-    //   id: "r43e4533r",
-    //   firstName: "Zach",
-    //   lastName: "Starin",
-    //   devices: [
-    //     {
-    //       make: "fitbit",
-    //       model: "charge3",
-    //       deviceUserId: "",
-    //       accessToken: "",
-    //       refreshToken: ""
-    //     }
-    //   ],
-    //   healthScore: {
-    //     calculated: "670",
-    //     components: {
-    //       sleep: {
-    //         averageDailySleepHours: "5.5"
-    //       },
-    //       fitness: {
-    //         averageDailyRigorousActivityMinutes: "35",
-    //         averageRigorousActivityTimesPerWeek: "3"
-    //       },
-    //       heartRate: {
-    //         averageRestingHeartRate: "73"
-    //       }
-    //     }
-    //   }
-    // },
-    // {
-    //   id: "r43e2344r",
-    //   firstName: "Marshall",
-    //   lastName: "Cox",
-    //   devices: [
-    //     {
-    //       make: "fitbit",
-    //       model: "charge3",
-    //       deviceUserId: "",
-    //       accessToken: "",
-    //       refreshToken: ""
-    //     }
-    //   ],
-    //   healthScore: {
-    //     calculated: "500",
-    //     components: {
-    //       sleep: {
-    //         averageDailySleepHours: "5.5"
-    //       },
-    //       fitness: {
-    //         averageDailyRigorousActivityMinutes: "35",
-    //         averageRigorousActivityTimesPerWeek: "3"
-    //       },
-    //       heartRate: {
-    //         averageRestingHeartRate: "73"
-    //       }
-    //     }
-    //   }
-    // }
-  ];
+  //get all accounts in db
+  const accounts = await rp(options);
+
+  console.log("got accounts:");
+  console.log(accounts);
 
   for (let account of accounts) {
     let options = {
       uri: `http://${apiUrl}/accounts/${account.id}`,
-      method: "POST",
-      body: account,
+      method: "PATCH",
+      body: {
+        offers: [
+          {
+            title: "Life Insurance Policy",
+            description: "30% less on monthly premium",
+            company: "Ladder Life Insurance",
+            image: "none",
+            link: "https://www.ladderlife.com/"
+          },
+          {
+            title: "Running Shoes",
+            description: "30% discount",
+            company: "Nike",
+            image: "none",
+            link: "https://www.nike.com/"
+          },
+          {
+            title: "Vitamins",
+            description: "20% discounted supplements",
+            company: "VitaminShoppe",
+            image: "none",
+            link: "https://www.vitaminshoppe.com"
+          }
+        ]
+      },
       json: true
     };
 
