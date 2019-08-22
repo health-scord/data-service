@@ -1,5 +1,5 @@
 const rp = require("request-promise");
-const apiUrl = `http://data-service:9000`;
+const apiUrl = `data-service:9000`;
 
 const main = async () => {
   const options = {
@@ -12,9 +12,9 @@ const main = async () => {
   const accounts = await rp(options);
 
   console.log("got accounts:");
-  console.log(accounts);
+  console.log(JSON.stringify(accounts));
 
-  for (let account of accounts) {
+  for await (let account of accounts) {
     let options = {
       uri: `http://${apiUrl}/accounts/${account.id}`,
       method: "PATCH",
